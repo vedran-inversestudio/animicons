@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animicons Demo - Filter Icon</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    .icon-container { display: inline-block; cursor: pointer; }
+    svg { width: 80px; height: 80px; display: block; }
+  </style>
+</head>
+<body>
+  <h2>Animated Filter Icon Demo</h2>
+  <div class="icon-container" id="filterIcon">
+    <!-- Inline SVG for Filter -->
+    <svg viewBox="0 0 24 24" fill="none">
+      <path id="filterPath"
+        d="M11 6.5V8.13333C11 9.16426 11.7835 10 12.75 10H16.25C17.2165 10 18 9.16426 18 8.13333V6.5M11 6.5V4.86667C11 3.83574 11.7835 3 12.75 3H16.25C17.2165 3 18 3.83574 18 4.86667V6.5M11 6.5L2.5 6.5M18 6.5L21.5 6.5M13 17.5V15.8667C13 14.8357 12.2165 14 11.25 14H7.75C6.7835 14 6 14.8357 6 15.8667L6 17.5M13 17.5V19.1333C13 20.1643 12.2165 21 11.25 21L7.75 21C6.7835 21 6 20.1643 6 19.1333L6 17.5M13 17.5L21.5 17.5M6 17.5H2.5"
+        stroke="#787878" stroke-width="1.75" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Anime.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script>
+    // Original and morphed path data (example: slightly "open" the filter on hover)
+    const original = `M11 6.5V8.13333C11 9.16426 11.7835 10 12.75 10H16.25C17.2165 10 18 9.16426 18 8.13333V6.5M11 6.5V4.86667C11 3.83574 11.7835 3 12.75 3H16.25C17.2165 3 18 3.83574 18 4.86667V6.5M11 6.5L2.5 6.5M18 6.5L21.5 6.5M13 17.5V15.8667C13 14.8357 12.2165 14 11.25 14H7.75C6.7835 14 6 14.8357 6 15.8667L6 17.5M13 17.5V19.1333C13 20.1643 12.2165 21 11.25 21L7.75 21C6.7835 21 6 20.1643 6 19.1333L6 17.5M13 17.5L21.5 17.5M6 17.5H2.5`;
+    // Morphed version: move some points for demo (you can use SVG path editors for more creative morphs)
+    const morphed = `M 6 6.5 V 8.1333 C 6 9.1643 6.7835 10 7.75 10 H 11.25 C 12.2165 10 13 9.1643 13 8.1333 V 6.5 M 6 6.5 V 5 C 6 3.8357 6.7835 3 7.75 3 H 11.25 C 12.2165 3 13 3.8357 13 4.8667 V 6.5 M 6 6.5 L 2.5 6.5 M 13 6.5 L 21.5 6.5 M 18 17.5 V 15.8667 C 18 14.8357 17.2165 14 16.25 14 H 12.75 C 11.7835 14 11 14.8357 11 15.8667 L 11 17.5 M 18 17.5 V 19.1333 C 18 20.1643 17.2165 21 16.25 21 L 12.75 21 C 11.7835 21 11 20.1643 11 19.1333 L 11 17.5 M 18 17.5 L 21.5 17.5 M 11 17.5 H 2.5`;
+
+    function addMorphAnimation({iconId, pathId, original, morphed}) {
+      const icon = document.getElementById(iconId);
+      const path = document.getElementById(pathId);
+      icon.addEventListener('mouseenter', () => {
+        anime({ targets: path, d: [{ value: morphed }], duration: 500, easing: 'easeInOutQuad' });
+      });
+      icon.addEventListener('mouseleave', () => {
+        anime({ targets: path, d: [{ value: original }], duration: 500, easing: 'easeInOutQuad' });
+      });
+    }
+
+    // Usage for filter icon:
+    addMorphAnimation({
+      iconId: 'filterIcon',
+      pathId: 'filterPath',
+      original: original,
+      morphed: morphed
+    });
+  </script>
+</body>
+</html>
