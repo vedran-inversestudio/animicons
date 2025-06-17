@@ -1,2 +1,2 @@
 # Animicons
-Animated icons
+Animated icons. Project in early research phase.
