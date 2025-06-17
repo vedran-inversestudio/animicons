@@ -1,2 +1,2 @@
-# animicons
+# Animicons
 Animated icons
